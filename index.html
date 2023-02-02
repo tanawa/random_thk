@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thk</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+        html {
+          height: 100%;
+        }
+        .ball {
+          position: absolute;
+          border-radius: 100%;
+          opacity: 0.7;
+        }
+
+        body {
+          overflow: hidden;
+          padding: 0;
+          margin: 0;
+            height: 100%;
+            background-image: url('./6057300.jpg');
+            background-size: cover;
+            font-family: 'Kanit', sans-serif;
+            color: #FFFFFF;
+        }
+
+        select, h1, h2 {
+            font-family: 'Kanit', sans-serif;
+        }
+
+
+        button {
+          font-family: 'Kanit', sans-serif;
+        }
+
+        .loader {
+          color: #ffffff;
+          font-size: 90px;
+          text-indent: -9999em;
+          overflow: hidden;
+          width: 1em;
+          height: 1em;
+          border-radius: 50%;
+          margin: 72px auto;
+          position: relative;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+          animation: load6 1.7s infinite ease, round 1.7s infinite ease;
+        }
+        @-webkit-keyframes load6 {
+          0% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          5%,
+          95% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          10%,
+          59% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+          }
+          20% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+          }
+          38% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+          }
+          100% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+        }
+        @keyframes load6 {
+          0% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          5%,
+          95% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+          10%,
+          59% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+          }
+          20% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+          }
+          38% {
+            box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+          }
+          100% {
+            box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+          }
+        }
+        @-webkit-keyframes round {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes round {
+          0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+          }
+          100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+
+        .element-show {
+          z-index: 9999;
+          position: absolute;
+          margin-left: 23%;
+          width: 50%;
+          height: 140px;
+          padding: 10px 25px;
+          border-radius: 25px;
+          color: #000;
+          background-color: #b7dce590;
+        }
+        
+        select {
+          margin-top: 20px;
+          padding: 10px 25px;
+          border:1px solid #DDD;
+          width: 120px;
+          border-radius: 5px;
+          font-size: 20px;
+          transition: all 0.5s ease;
+          margin-right: 20px;
+        }
+
+        button {
+          margin-top: 20px;
+          padding: 10px 25px;
+          border:1px solid #DDD;
+          width: 120px;
+          border-radius: 5px;
+          font-size: 20px;
+          transition: all 0.5s ease;
+        }
+
+        button:hover {
+          transform: scale(0.9);
+        }
+
+        .logo {
+          margin-bottom: 5vh;
+          margin-top: 15vh;
+        }
+
+        .logo > img:nth-child(1) {
+          margin-right: 20px;
+        }
+
+        .nav {
+          margin-top: 30vh;
+        }
+
+        .fab {
+          position: absolute;
+          left: 60%;
+          z-index: 999999;
+          width: 400px;
+        }
+
+        .fab2 {
+          position: absolute;
+          left: 10%;
+          z-index: 999999;
+          width: 400px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <center>
+
+            <div class="logo">
+              <img src="./logothk800.png" width="120px">
+              <img src="./S__10551322-removebg-preview.png" width="180px">
+            </div>
+            <img src="./b1.png" class="fab">
+            <img src="./g1.png" class="fab2">
+            <div class="element-show">
+              
+                <h1 id="name">None</h1>
+                <h2 id="class">-</h2>
+            </div>
+            <div class="nav">
+                <select id="filter_mathayom">
+                    <option>ทั้งหมด</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
+
+                <button id="action">
+                  <i class="fa fa-refresh"></i>
+                  สุ่ม
+                </button>
+            </div>
+        </center>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-analytics.js";
+        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
+
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyBGkQh9ygRa6-iEY2V4mWQ8YGemFZA4-HI",
+          authDomain: "thkstorage-ec701.firebaseapp.com",
+          databaseURL: "https://thkstorage-ec701-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "thkstorage-ec701",
+          storageBucket: "thkstorage-ec701.appspot.com",
+          messagingSenderId: "860238694028",
+          appId: "1:860238694028:web:eb11c76b00610b5a759da9",
+          measurementId: "G-QQ7N46GESF"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        const starCountRef = ref(database, 'student');
+        
+        document.getElementById('action').addEventListener('click', ()=>{
+            onValue(starCountRef, (snapshot) => {
+                const data = snapshot.val();
+                
+                let mathayom = document.getElementById('filter_mathayom').value == 'ทั้งหมด' ? Math.floor(Math.random() * 6)+1 : document.getElementById('filter_mathayom').value
+                let class_room = Math.floor(Math.random() * 23)+1
+                let number = Math.floor(Math.random() * 50)+1
+                console.log(mathayom, class_room, number)
+                if(data[mathayom][class_room] != undefined){
+                    if(data[mathayom][class_room][number] != undefined){
+                        let number_student = Object.keys(data[mathayom][class_room][number])[0]
+                        const starCountRef_used = ref(database, 'student_used/'+mathayom+'/'+class_room+'/'+number+'/'+number_student);
+                        onValue(starCountRef_used, (snapshot_ued) => {
+                            const data_used = snapshot_ued.val();
+                            console.log(data_used)
+                            if(data_used == null){
+                                set(ref(database, 'student_used/'+mathayom+'/'+class_room+'/'+number+'/'+number_student), {
+                                    random: true,
+                                });
+                                document.getElementById('class').innerHTML = " "
+                                document.getElementById('name').innerHTML = " "
+                                setTimeout(()=>{
+                                  document.getElementById('class').innerHTML = "มัธยมศึกษาปีที่ " + mathayom
+                                  setTimeout(()=>{
+                                    document.getElementById('class').innerHTML = "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room
+                                    setTimeout(()=>{
+                                      document.getElementById('class').innerHTML = "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room
+                                      var text_name = Object.values(data[mathayom][class_room][number][number_student])[0]
+                                      var mix = ''
+                                      function recursive(number,end){
+                                        console.log(number,end,text_name[number])
+                                        if(number >= end){
+                                          document.getElementById('name').innerHTML = text_name
+                                        }else{
+                                          setTimeout(()=>{
+                                            mix += text_name[number]
+                                            document.getElementById('name').innerHTML = mix
+                                            recursive(number+1,end)
+                                          },200)
+                                        }
+                                      }
+                                      
+                                      recursive(0,text_name.length)
+                                      
+                                    },1000)
+                                  },1000)
+                                },1000)
+                                
+                            }else{
+                                console.log('ซ้ำ')
+                                document.getElementById('action').click()
+                            }
+                            
+                        },{
+                            onlyOnce: true
+                        });
+                        
+                    }else{
+                        console.log('ไม่พบ')
+                        document.getElementById('action').click()
+                    }
+                }
+                
+                
+            },{
+                onlyOnce: true
+            });
+        })
+
+        const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+        const numBalls = 50;
+        var balls = []
+        for (let i = 0; i < numBalls; i++) {
+          let ball = document.createElement("div");
+          ball.classList.add("ball");
+          ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+          ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
+          ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
+          ball.style.transform = `scale(${Math.random()})`;
+          ball.style.width = `${Math.random()}em`;
+          ball.style.height = ball.style.width;
+          
+          balls.push(ball);
+          document.body.append(ball);
+        }
+
+        balls.forEach((el, i, ra) => {
+          let to = {
+            x: Math.random() * (i % 2 === 0 ? -11 : 11),
+            y: Math.random() * 12
+          };
+          let anim = el.animate(
+            [
+              { transform: "translate(0, 0)" },
+              { transform: `translate(${to.x}rem, ${to.y}rem)` }
+            ],
+            {
+              duration: (Math.random() + 1) * 2000, // random duration
+              direction: "alternate",
+              fill: "both",
+              iterations: Infinity,
+              easing: "ease-in-out"
+            }
+          );
+        });
+      </script>
+</body>
+</html>
