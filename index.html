@@ -323,7 +323,7 @@
       }
     })
 
-    const starCountRef = ref(database, 'student');
+    const starCountRef = ref(database, 'student_2025');
 
     document.getElementById('action').addEventListener('click', () => {
       onValue(starCountRef, (snapshot) => {
@@ -336,12 +336,12 @@
         if (data[mathayom][class_room] != undefined) {
           if (data[mathayom][class_room][number] != undefined) {
             let number_student = Object.keys(data[mathayom][class_room][number])[0]
-            const starCountRef_used = ref(database, 'student_used/' + mathayom + '/' + class_room + '/' + number + '/' + number_student);
+            const starCountRef_used = ref(database, 'student_used_2025/' + mathayom + '/' + class_room + '/' + number + '/' + number_student);
             onValue(starCountRef_used, (snapshot_ued) => {
               const data_used = snapshot_ued.val();
               console.log(data_used)
               if (data_used == null) {
-                set(ref(database, 'student_used/' + mathayom + '/' + class_room + '/' + number + '/' + number_student), {
+                set(ref(database, 'student_used_2025/' + mathayom + '/' + class_room + '/' + number + '/' + number_student), {
                   random: true,
                 });
                 document.getElementById('class').innerHTML = " "
