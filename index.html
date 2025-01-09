@@ -330,7 +330,7 @@
     const starCountRef = ref(database, 'student_2025');
 
     function componentsRandom(n) {
-      m = 0
+      let m = 0
       while (m < n) {
         onValue(starCountRef, (snapshot) => {
           const data = snapshot.val();
