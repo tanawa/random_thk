@@ -46,8 +46,10 @@
             const data = snapshot.val();
             const obj_key = Object.keys(data)
             let text = "<table>"
+            let k=0
             obj_key.forEach(item => {
-                text += "<tr><td>" + item + "</td><td>" + data[item]["name"] + "</td></tr>"
+                k+=1
+                text += "<tr><td>ลำดับที่ "+k+" </td><td>" + item + "</td><td>" + data[item]["name"] + "</td></tr>"
             })
             text += "</table>"
             const element = document.getElementById('container')
