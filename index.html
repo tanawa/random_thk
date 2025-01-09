@@ -33,7 +33,7 @@
     }
 
     h1 {
-      font-size: 60pt;
+      font-size: 40pt;
       margin-bottom: 10px;
     }
 
@@ -205,8 +205,8 @@
     }
 
     .logo {
-      margin-bottom: 5vh;
-      margin-top: 2vh;
+      margin-bottom: 0vh;
+      margin-top: -5vh;
     }
 
     .logo>img:nth-child(1) {
@@ -219,32 +219,39 @@
 
     .fab {
       position: absolute;
-      top: 50%;
+      top: 40%;
       left: 74%;
-      z-index: 999999;
-      width: 400px;
+      z-index: 99999999;
+      width: 200px;
     }
 
     .fab2 {
       position: absolute;
       top: 33%;
-      left: 3%;
+      left: 6%;
       z-index: 999999;
       width: 500px;
     }
 
     #list {
-      width: 200px;
-      height: 300px;
+      width: 20%;
+      height: 100dvh;
       overflow-y: scroll;
-      display: none;
+      display: block;
       position: absolute;
-      background-color: #FFFFFF90;
-      right: 10px;
-      bottom: 30%;
+      background-color: #DDDDDD;
+      right: 1%;
+      top: 1%;
+      bottom: 0%;
       z-index: 9999999;
       color: #000;
+      font-size: 30;
       border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 5px;
     }
   </style>
 
@@ -254,14 +261,14 @@
   <div id="app">
     <center>
       <p id="list"></p>
-<!-- 
+      <!-- 
       <h3 class="title">ของขวัญปีใหม่ และวันเด็กประจำปี 2568</h3>
        -->
       <div class="logo">
         <img src="./logothk900.png" width="720px">
 
         <!-- <img src="./S__10551322-removebg-preview.png" width="180px"> -->
-      
+
       </div>
       <img src="./mine.png" class="fab">
       <img src="./zombie.png" class="fab2">
@@ -321,7 +328,7 @@
     const starCountRef_used = ref(database, 'event');
     onValue(starCountRef_used, (snapshot) => {
       const data = snapshot.val();
-      console.log(data, data['event'] == 'aa')
+      //console.log(data, data['event'] == 'aa')
       if (data['event'] == 'aa') {
         document.getElementById('action').click()
       }
@@ -329,27 +336,33 @@
 
     const starCountRef = ref(database, 'student_2025');
 
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     function componentsRandom(n) {
       let m = 0
       while (m < n) {
+        m += 1
         onValue(starCountRef, (snapshot) => {
           const data = snapshot.val();
 
           let mathayom = document.getElementById('filter_mathayom').value == 'ทั้งหมด' ? Math.floor(Math.random() * 6) + 1 : document.getElementById('filter_mathayom').value
           let class_room = Math.floor(Math.random() * 23) + 1
           let number = Math.floor(Math.random() * 50) + 1
-          console.log(mathayom, class_room, number)
+          //console.log(mathayom, class_room, number)
           if (data[mathayom][class_room] != undefined) {
             if (data[mathayom][class_room][number] != undefined) {
               let number_student = Object.keys(data[mathayom][class_room][number])[0]
               const starCountRef_used = ref(database, 'student_used_2025/' + mathayom + '/' + class_room + '/' + number + '/' + number_student);
               onValue(starCountRef_used, (snapshot_ued) => {
                 const data_used = snapshot_ued.val();
-                console.log(data_used)
+                //console.log(data_used)
                 if (data_used == null) {
                   set(ref(database, 'student_used_2025/' + mathayom + '/' + class_room + '/' + number + '/' + number_student), {
                     random: true,
                   });
+
                   document.getElementById('class').innerHTML = " "
                   document.getElementById('name').innerHTML = " "
                   setTimeout(() => {
@@ -361,27 +374,30 @@
                         var text_name = Object.values(data[mathayom][class_room][number][number_student])[0]
                         var mix = ''
                         function recursive(number, end) {
-                          console.log(number, end, text_name[number])
+                          //console.log(number, end, text_name[number])
                           if (number >= end) {
+                            set(ref(database, 'student_used_check_2025/' + number_student), {
+                              name: text_name,
+                            });
                             document.getElementById('name').innerHTML = text_name
-                            document.getElementById('list').innerHTML = text_name + "<br>" + document.getElementById('list').innerHTML
+                            document.getElementById('list').innerHTML = "<h2>" + text_name + "</h2><span>" + "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number + "</span>" + "<br>" + document.getElementById('list').innerHTML
                           } else {
                             setTimeout(() => {
                               mix += text_name[number]
                               document.getElementById('name').innerHTML = mix
                               recursive(number + 1, end)
-                            }, 200)
+                            }, 50)
                           }
                         }
 
                         recursive(0, text_name.length)
 
-                      }, 200)
-                    }, 200)
-                  }, 200)
+                      }, 50)
+                    }, 50)
+                  }, 50)
 
                 } else {
-                  console.log('ซ้ำ')
+                  //console.log('ซ้ำ')
                   document.getElementById('action').click()
                 }
 
@@ -390,7 +406,7 @@
               });
 
             } else {
-              console.log('ไม่พบ')
+              //console.log('ไม่พบ')
               document.getElementById('action').click()
             }
           }
@@ -399,7 +415,7 @@
         }, {
           onlyOnce: true
         });
-        m += 1
+
       }
     }
 
