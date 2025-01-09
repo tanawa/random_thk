@@ -1,71 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/@linways/table-to-excel@1.0.4/dist/tableToExcel.min.js"></script>
+  </head>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@linways/table-to-excel@1.0.4/dist/tableToExcel.min.js"
+  ></script>
 
-<body>
-    <div id="container">
-
-    </div>
+  <body>
+    <center>
+      <img src="./logothk900.png" />
+      <div id="container"></div>
+    </center>
     <button id="save">save</button>
     <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-analytics.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-analytics.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        onValue,
+      } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
 
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
 
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBGkQh9ygRa6-iEY2V4mWQ8YGemFZA4-HI",
+        authDomain: "thkstorage-ec701.firebaseapp.com",
+        databaseURL:
+          "https://thkstorage-ec701-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "thkstorage-ec701",
+        storageBucket: "thkstorage-ec701.appspot.com",
+        messagingSenderId: "860238694028",
+        appId: "1:860238694028:web:eb11c76b00610b5a759da9",
+        measurementId: "G-QQ7N46GESF",
+      };
 
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyBGkQh9ygRa6-iEY2V4mWQ8YGemFZA4-HI",
-            authDomain: "thkstorage-ec701.firebaseapp.com",
-            databaseURL: "https://thkstorage-ec701-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "thkstorage-ec701",
-            storageBucket: "thkstorage-ec701.appspot.com",
-            messagingSenderId: "860238694028",
-            appId: "1:860238694028:web:eb11c76b00610b5a759da9",
-            measurementId: "G-QQ7N46GESF"
-        };
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const database = getDatabase(app);
 
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const database = getDatabase(app);
+      const starCountRef_used = ref(database, "student_used_check_2025");
+      onValue(starCountRef_used, (snapshot) => {
+        const data = snapshot.val();
+        const obj_key = Object.keys(data);
+        let text = "<table>";
+        let k = 0;
+        obj_key.forEach((item) => {
+          k += 1;
+          text +=
+            "<tr><td>ลำดับที่ " +
+            k +
+            " </td><td>" +
+            item +
+            "</td><td>" +
+            data[item]["name"] +
+            "</td></tr>";
+        });
+        text += "</table>";
+        const element = document.getElementById("container");
+        element.innerHTML = text;
+        console.log(data);
+      });
 
-        const starCountRef_used = ref(database, 'student_used_check_2025');
-        onValue(starCountRef_used, (snapshot) => {
-            const data = snapshot.val();
-            const obj_key = Object.keys(data)
-            let text = "<table>"
-            let k=0
-            obj_key.forEach(item => {
-                k+=1
-                text += "<tr><td>ลำดับที่ "+k+" </td><td>" + item + "</td><td>" + data[item]["name"] + "</td></tr>"
-            })
-            text += "</table>"
-            const element = document.getElementById('container')
-            element.innerHTML = text
-            console.log(data)
-        })
-
-        document.getElementById('save').addEventListener('click', () => {
-            TableToExcel.convert(document.getElementById("container"), {
-                name: "table1.xlsx",
-                sheet: {
-                    name: "Sheet 1"
-                }
-            });
-        })
+      document.getElementById("save").addEventListener("click", () => {
+        TableToExcel.convert(document.getElementById("container"), {
+          name: "table1.xlsx",
+          sheet: {
+            name: "Sheet 1",
+          },
+        });
+      });
     </script>
-</body>
-
+  </body>
 </html>
