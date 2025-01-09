@@ -377,7 +377,7 @@
                           //console.log(number, end, text_name[number])
                           if (number >= end) {
                             set(ref(database, 'student_used_check_2025/' + parseInt((new Date().getTime()).toString().substring(0,10)).toString()), {
-                              data: text_name + "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number,
+                              data: text_name + " รหัสนักเรียน" + number_student + " มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number,
                             });
                             document.getElementById('name').innerHTML = text_name
                             document.getElementById('list').innerHTML = "<h2>" + text_name + "</h2><span>" + "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number + "</span>" + "<br>" + document.getElementById('list').innerHTML
