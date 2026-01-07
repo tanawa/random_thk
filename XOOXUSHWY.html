@@ -26,13 +26,14 @@
       padding: 0;
       margin: 0;
       height: 100%;
-      background-image: url('./6057300.jpg');
+      background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
       background-size: cover;
       font-family: 'Kanit', sans-serif;
       color: #FFFFFF;
     }
 
     h1 {
+      margin-top: 80px;
       font-size: 40pt;
       margin-bottom: 10px;
     }
@@ -153,35 +154,41 @@
     .element-show {
       z-index: 9999;
       position: absolute;
+      overflow: hidden;
+      backdrop-filter: blur(2px);
       margin-left: 14%;
-      width: 70%;
+      width: 60%;
       height: 280px;
       padding: 10px 25px;
       border-radius: 25px;
       color: #000;
-      background-color: #ffffff90;
+      background-color: #ffffff98;
     }
 
     select {
       color: #FFFFFF;
-      background: #023ca8;
+      background: linear-gradient(#0845b8, #092b6b);
       margin-top: 20px;
       padding: 10px 25px;
-      border: 1px solid #DDD;
+      border: 1px solid #023ca8;
       width: 160px;
       height: 70px;
+      cursor: pointer;
       border-radius: 10px;
       font-size: 20px;
       transition: all 0.5s ease;
       margin-right: 20px;
+      outline: none;
     }
 
     button {
       color: #FFFFFF;
       margin-top: 20px;
       padding: 10px 25px;
-      border: 1px solid #DDD;
-      background: #cf3f3f;
+      border: 1px solid #7b0e0e;
+      outline: none;
+      cursor: pointer;
+      background: linear-gradient(#cf3f3f, #7b0e0e);
       width: 160px;
       height: 70px;
       border-radius: 10px;
@@ -206,6 +213,7 @@
 
     .logo {
       margin-bottom: 0vh;
+      padding-right: 5%;
       margin-top: -5vh;
     }
 
@@ -215,6 +223,7 @@
 
     .nav {
       margin-top: 40vh;
+      margin-right: 5%;
     }
 
     .fab {
@@ -240,8 +249,9 @@
       display: block;
       position: absolute;
       background-color: #DDDDDD;
-      right: 1%;
-      top: 1%;
+      right: 0px;
+      top: 0px;
+      margin-top: 0px;
       bottom: 0%;
       z-index: 9999999;
       color: #000;
@@ -253,7 +263,11 @@
       font-size: 20px;
       margin-bottom: 5px;
     }
+
+    /*---*/
+    
   </style>
+
 
 </head>
 
@@ -270,10 +284,11 @@
         <!-- <img src="./S__10551322-removebg-preview.png" width="180px"> -->
 
       </div>
-      <img src="./mine.png" class="fab">
-      <img src="./zombie.png" class="fab2">
+      <img src="./3d-render-gift-box-with-ribbon-present-package-removebg-preview.png" class="fab2">
+      
+      <img src="./3d-render-gift-box-with-ribbon-present-package__1_-removebg-preview.png" class="fab">
       <div class="element-show">
-
+        <!-- <img src="./124de3d1b5e12f1d8fcec1685e634361.gif" alt=""> -->
         <h1 id="name">None</h1>
         <h2 id="class">-</h2>
       </div>
@@ -334,7 +349,7 @@
       }
     })
 
-    const starCountRef = ref(database, 'student_2025');
+    const starCountRef = ref(database, 'student_2026');
 
     function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -354,12 +369,12 @@
           if (data[mathayom][class_room] != undefined) {
             if (data[mathayom][class_room][number] != undefined) {
               let number_student = Object.keys(data[mathayom][class_room][number])[0]
-              const starCountRef_used = ref(database, 'student_used_2025/' + mathayom + '/' + class_room + '/' + number + '/' + number_student);
+              const starCountRef_used = ref(database, 'student_used_2026/' + mathayom + '/' + class_room + '/' + number + '/' + number_student);
               onValue(starCountRef_used, (snapshot_ued) => {
                 const data_used = snapshot_ued.val();
                 //console.log(data_used)
                 if (data_used == null) {
-                  set(ref(database, 'student_used_2025/' + mathayom + '/' + class_room + '/' + number + '/' + number_student), {
+                  set(ref(database, 'student_used_2026/' + mathayom + '/' + class_room + '/' + number + '/' + number_student), {
                     random: true,
                   });
 
@@ -373,19 +388,20 @@
                         document.getElementById('class').innerHTML = "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room
                         var text_name = Object.values(data[mathayom][class_room][number][number_student])[0]
                         var mix = ''
-                        function recursive(number, end) {
+                        console.log(mathayom,class_room,number)
+                        function recursive(number_c, end) {
                           //console.log(number, end, text_name[number])
-                          if (number >= end) {
-                            set(ref(database, 'student_used_check_2025/' + parseInt((new Date().getTime()).toString().substring(0,10)).toString()), {
-                              data: text_name + " รหัสนักเรียน" + number_student + " มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number,
-                            });
+                          if (number_c >= end) {
+                            // set(ref(database, 'student_used_check_2026/' + parseInt((new Date().getTime()).toString().substring(0,10)).toString()), {
+                            //   data: text_name + " รหัสนักเรียน " + number_student + " มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number,
+                            // });
                             document.getElementById('name').innerHTML = text_name
                             document.getElementById('list').innerHTML = "<h2>" + text_name + "</h2><span>" + "มัธยมศึกษาปีที่ " + mathayom + " ห้อง " + class_room + " เลขที่ " + number + "</span>" + "<br>" + document.getElementById('list').innerHTML
                           } else {
                             setTimeout(() => {
-                              mix += text_name[number]
+                              mix += text_name[number_c]
                               document.getElementById('name').innerHTML = mix
-                              recursive(number + 1, end)
+                              recursive(number_c + 1, end)
                             }, 50)
                           }
                         }
